@@ -20,7 +20,7 @@ RimWorld 1.7（Waylith 引擎）用的修复 mod：让 IsoRim 的纸片小人身
 ## 依赖
 
 - **Harmony**（brrainz.harmony）
-- **IsoRim Waylith**（Peren.IsoRim17）
+- **[IsoRim Waylith](https://github.com/peren717/IsoRim-1.7)**（Peren.IsoRim17）
 
 建议在 loadOrder 里排在 IsoRim 之后。
 
@@ -40,7 +40,7 @@ Isekai RPG Leveling（飞升光环）、Isekai Dungeons（神性光环）、Cele
 
 ## 致谢
 
-- **IsoRim Waylith**（Peren）—— 卡片渲染与 API
+- **[IsoRim Waylith](https://github.com/peren717/IsoRim-1.7)**（Peren）—— 卡片渲染与 API
 - **Visceral Anatomy - Gore & Regeneration**（TanyaVonHart）—— 穿刺桩适配的参考对象
 - 以及提出问题的各位玩家
 
