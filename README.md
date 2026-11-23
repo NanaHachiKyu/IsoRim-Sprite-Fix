@@ -1,50 +1,60 @@
-# IsoRim Sprite Fix（贴图武器修复）
+# IsoRim Sprite Fix
 
-RimWorld 1.7（Waylith 引擎）用的修复 mod：让 IsoRim 的纸片小人身上的**武器、装备、其它 mod 的自绘部件**，
-以及**立牌建筑里的内容**，正确地跟随卡片立起、随视角转动。
+[English](README.md) | [简体中文](README.zh-CN.md)
 
-> 本 mod 只修 2D。如果你装了启用 3D 小人的 mod（SYS 相关），3D 小人依旧会有问题 —— 纸片小人就该配纸片武器。
+A fix mod for RimWorld 1.7 (Waylith engine): keeps the **weapons, apparel and other mods' extra parts** of
+IsoRim's billboard pawns attached to the card, and folds the **contents of card buildings** onto their cards.
+Everything turns with the camera instead of staying flat on the ground.
 
-## 功能
+> This mod fixes 2D only. If you run a mod that draws 3D pawns (anything using SYS), 3D pawns still have their own
+> problems — a paper pawn should carry a paper weapon.
 
-- **武器贴图**：待机时按原版 `DrawCarriedWeapon` 规则重算朝向，修复「移动时枪乱跑」「背身不遮挡武器」。
-- **额外部件**：自动检测卡片小人身上未被 IsoRim 变换的绘制调用（光环、护盾、装饰等），列进设置，勾选后按卡片方式绘制。
-  每个方法可单独调 **层级（renderQueue）/ 平面左右 / 平面上下 / 深度**，数值可直接点击输入。
-- **建筑立牌**：被装进立牌建筑里的东西（穿刺桩上的人、尸体、血迹、尖刺）跟着卡片一起立起来。
-  同样逐个方法可控，默认值已按穿刺桩实测调好。
-- **游戏内入口**：地图视角右下角按钮栏多一个图标，点开就是设置窗口 —— 可拖动、可拉伸、不暂停游戏、记住位置。
-  选项菜单里的「模组设置」也能进，内容一样。
-- **内置模型包**：原先单独安装的 MyModelPack 已并入本 mod，不再需要额外安装；用 IsoRim 的模型绑定器重新导出后，
-  下次启动会自动同步进来。
+## Features
 
-## 依赖
+- **Weapon sprites**: an idle weapon's facing is recomputed with the vanilla `DrawCarriedWeapon` rules, fixing
+  "the gun slides around while walking" and "the weapon is not hidden when seen from behind".
+- **Extra parts**: detects drawing calls on a card pawn that IsoRim does not transform (halos, shields, decorations)
+  and lists them in the settings; tick one and it is drawn as part of the card.
+  Each method has its own **layer (renderQueue) / plane left / plane up / depth**, and the numbers can be clicked and
+  typed in directly.
+- **Card buildings**: things inside a building that IsoRim stands up as a card (a body, a corpse, blood, the spike on
+  an impaling stake) follow the card. Also per-method, with measured defaults for the impaling stake.
+- **In-game entry**: one more icon in the button row at the right edge of the map view opens this mod's settings —
+  draggable, resizable, does not pause the game, and remembers where you left it. The options-menu entry still works
+  and shows the same pages.
+- **Built-in model pack**: the previously separate MyModelPack is merged in, so it is no longer needed as its own mod.
+  Re-exporting with IsoRim's model binder syncs the new models in on the next start.
 
-- **Harmony**（brrainz.harmony）
-- **[IsoRim Waylith](https://github.com/peren717/IsoRim-1.7)**（Peren.IsoRim17）
+## Requirements
 
-建议在 loadOrder 里排在 IsoRim 之后。
+- **Harmony** (brrainz.harmony)
+- **[IsoRim Waylith](https://github.com/peren717/IsoRim-1.7)** (Peren.IsoRim17)
 
-## 已知问题
+Load this mod after IsoRim.
 
-- 装有 Show Me Your Hands 时，开始射击后旋转视角小手位置不对（暂不修，基本无伤大雅）。
-- 更多绮罗勇者的法杖会以非常滑稽的形式拿在手里。
-- 跨楼层（IsoRimZ）：上层楼的附加部件位置仍在修正中。
+## Known issues
 
-## 兼容性
+- With Show Me Your Hands, the hands are misplaced after starting to aim and turning the camera (not fixed yet;
+  mostly harmless).
+- The staff of 更多绮罗勇者 is held in a rather comical way.
+- IsoRimZ upper floors: extra parts on the second floor and above are still being fixed.
 
-已确认可处理的：Show Me Your Hands、NewRatkinPlus、Epona Dynastic Rise、Miho、SQUISHY Ranged、
-Isekai RPG Leveling（飞升光环）、Isekai Dungeons（神性光环）、CeleTech、VEF 护盾等。
+## Compatibility
 
-其它 mod 的贴图还粘在地上？打开设置里的「自动检测其它 mod 的自绘部件」，装备一次那个物品/站在那里，
-回到设置勾上新出现的「发现的绘制方法」，然后可以把检测关掉（省性能）。
+Confirmed to work with: Show Me Your Hands, NewRatkinPlus, Epona Dynastic Rise, Miho, SQUISHY Ranged,
+Isekai RPG Leveling (ascension halo), Isekai Dungeons (godhood halo), CeleTech, VEF shield bubbles and more.
 
-## 致谢
+Another mod's sprite still stuck to the ground? Turn on **"auto-detect other mods' extra parts"** in the settings,
+equip the item once (or stand there), then tick the newly listed method back in the settings. You can turn detection
+off afterwards to save performance.
 
-- **[IsoRim Waylith](https://github.com/peren717/IsoRim-1.7)**（Peren）—— 卡片渲染与 API
-- **Visceral Anatomy - Gore & Regeneration**（TanyaVonHart）—— 穿刺桩适配的参考对象
-- 以及提出问题的各位玩家
+## Credits
 
-## 许可
+- **[IsoRim Waylith](https://github.com/peren717/IsoRim-1.7)** (Peren) — card rendering and API
+- **Visceral Anatomy - Gore & Regeneration** (TanyaVonHart) — reference for the impaling-stake adaptation
+- Everyone who reported problems
 
-代码与文档：见 LICENSE（如未提供，保留所有权利）。
-`Models/` 里的模型由作者用 IsoRim 模型绑定器制作，不随本仓库分发。
+## License
+
+Code and documentation: see `LICENSE`. Models under `Models/` are made by the author with IsoRim's model binder and
+are not distributed with this repository.
