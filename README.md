@@ -37,7 +37,6 @@ Load this mod after IsoRim.
 - With Show Me Your Hands, the hands are misplaced after starting to aim and turning the camera (not fixed yet;
   mostly harmless).
 - The staff of 更多绮罗勇者 is held in a rather comical way.
-- IsoRimZ upper floors: extra parts on the second floor and above are still being fixed.
 
 ## Compatibility
 
