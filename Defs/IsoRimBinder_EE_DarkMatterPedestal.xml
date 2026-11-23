@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- IsoRim model binder export, 2026-11-19 22:01, IsoRim Api 81.
+     Model for EE_DarkMatterPedestal from: 
+     No thingDef here and no fields newer than Api 2: Patches/IsoRimBinder_EE_DarkMatterPedestal.xml adds them (see IsoRim's Docs/ModelPacks.md). -->
+<Defs>
+  <IsoRim.ModelDef>
+    <defName>R3D_MyModelPack_EE_DarkMatterPedestal</defName>
+    <offset>(0, -0.1, 0)</offset>
+    <spriteTint>true</spriteTint>
+    <builtFor>(1, 1)</builtFor>
+  </IsoRim.ModelDef>
+</Defs>

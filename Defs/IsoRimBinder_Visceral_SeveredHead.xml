@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- IsoRim model binder export, 2026-11-17 12:33, IsoRim Api 81.
+     Model for Visceral_SeveredHead from: 
+     No thingDef here: Patches/IsoRimBinder_Visceral_SeveredHead.xml adds them (see IsoRim's Docs/ModelPacks.md). -->
+<Defs>
+  <IsoRim.ModelDef>
+    <defName>R3D_MyModelPack_Visceral_SeveredHead</defName>
+    <offset>(0, -0.02, 0)</offset>
+    <height>0.01</height>
+    <overArt>true</overArt>
+    <builtFor>(1, 1)</builtFor>
+  </IsoRim.ModelDef>
+</Defs>

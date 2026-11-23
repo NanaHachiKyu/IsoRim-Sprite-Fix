@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ModMetaData>
+  <name>IsoRim Sprite Fix (贴图武器修复)</name>
+  <author>氘镉殆</author>
+  <packageId>dogdie.isorimweaponcards</packageId>
+  <supportedVersions><li>1.7</li></supportedVersions>
+  <modDependencies>
+    <li><packageId>brrainz.harmony</packageId><displayName>Harmony</displayName></li>
+    <li><packageId>Peren.IsoRim17</packageId><displayName>IsoRim Waylith</displayName></li>
+  </modDependencies>
+  <loadAfter>
+    <li>brrainz.harmony</li>
+    <li>Peren.IsoRim17</li>
+    <li>Mlie.ShowMeYourHands</li>
+    <li>local.gunrecoil</li>
+  </loadAfter>
+  <description>
+    !!!注意!!!
+    本mod仅修复2D,如果你加了sys相关mod开3D小人依旧会有问题!
+
+    修复使用SYS.dll的mod导致isorim贴图武器粘在地上的问题,纸片小人就应该用纸片武器!
+
+    使用SYS.dll的mod我装的有:
+    Epona Dynastic Rise
+    NewRatkinPlus
+    Miho, the celestial fox
+
+    - 维持原本isorim的武器纸片效果
+    - 兼容 Show Me Your Hands  [spoiler]让你的小手能在3D世界里不粘在地上![/spoiler]
+    - 兼容 SQUISHY Ranged
+    - 兼容 NewRatkinPlus 的武器
+    - 兼容 Epona Dynastic Rise 的盾
+    - Miho 受影响的武器我还没找到,有的话再修
+
+    #通用兼容
+    某个 mod 的物品在纸片小人身上还贴地？打开设置里的「自动检测其它 mod 的自绘部件」，
+    装备一次那个物品，回到设置勾上新出现的「发现的绘制方法」即可。设置自动保存。
+    （若勾选后身体/武器被压扁，取消勾选。）
+
+    11.21更新:
+        - 可以读取更多绘制方法,包括光环等
+        - 理论上可以读取大部分绘制方法并修复
+        - 提供了贴图偏移,如果启用后位置不对可以自己调整XY和显示层级
+
+    11.22/11.23更新:
+        - 设置窗口分成三页:角色卡片 / 建筑卡片 / 控件设置
+        - 新增「建筑卡片」:被装进立牌建筑里的人、尸体、血迹会跟着卡片一起立起来
+          (目前验证过穿刺桩,其它立牌建筑会自动列进列表让你勾选)
+        - 游戏右下角那排按钮加了本 mod 的设置入口(可以在「控件设置」页关掉)
+        - 设置窗口可以像普通窗口一样拖动和拉伸,关掉时会记住位置
+        - 内置了原来 MyModelPack 的模型,不再需要单独装那个 mod
+        - 偏移数值可以直接左键点击输入,回车或点别处生效
+
+    #已修复问题:
+    ! 移动时枪乱跑
+    ! 背身不遮挡武器
+
+    #已知问题:
+    装有 Show Me Your Hands时,开始射击后旋转视角手的位置不对(暂不修复.基本上无伤大雅)
+    更多绮罗勇者的法杖会以非常滑稽的形式拿在手里
+
+    有bug请告诉我 :)
+  </description>
+</ModMetaData>

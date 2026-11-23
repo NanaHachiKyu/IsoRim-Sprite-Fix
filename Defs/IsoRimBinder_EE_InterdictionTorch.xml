@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- IsoRim model binder export, 2026-11-17 17:03, IsoRim Api 81.
+     Model for EE_InterdictionTorch from: D:\steam\steamapps\workshop\content\294100\3836587661\Models\uf_horizon_skyline.obj
+     No thingDef here: Patches/IsoRimBinder_EE_InterdictionTorch.xml adds them (see IsoRim's Docs/ModelPacks.md). -->
+<Defs>
+  <IsoRim.ModelDef>
+    <defName>R3D_MyModelPack_EE_InterdictionTorch</defName>
+    <model>Models/uf_horizon_skyline.obj</model>
+    <builtFor>(1, 1)</builtFor>
+  </IsoRim.ModelDef>
+</Defs>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- Binds R3D_MyModelPack_EE_DarkMatterPedestal to EE_DarkMatterPedestal and adds its fields newer than Api 2 when IsoRim has Api 52 or later (the fields it uses); an older IsoRim leaves the thing as it is. -->
+  <Operation Class="IsoRimPackGate.PatchOperation_IfIsoRimApi">
+    <minVersion>52</minVersion>
+    <apply Class="PatchOperationAdd">
+      <xpath>/Defs/IsoRim.ModelDef[defName="R3D_MyModelPack_EE_DarkMatterPedestal"]</xpath>
+      <value>
+        <thingDef>EE_DarkMatterPedestal</thingDef>
+        <shape>Box</shape>
+        <boxFaces>
+          <li>
+            <look>None</look>
+          </li>
+        </boxFaces>
+      </value>
+    </apply>
+  </Operation>
+</Patch>

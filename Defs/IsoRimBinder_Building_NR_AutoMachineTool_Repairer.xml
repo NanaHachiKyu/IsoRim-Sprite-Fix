@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- IsoRim model binder export, 2026-11-17 11:55, IsoRim Api 81.
+     Model for Building_NR_AutoMachineTool_Repairer from: 
+     No thingDef here: Patches/IsoRimBinder_Building_NR_AutoMachineTool_Repairer.xml adds them (see IsoRim's Docs/ModelPacks.md). -->
+<Defs>
+  <IsoRim.ModelDef>
+    <defName>R3D_MyModelPack_Building_NR_AutoMachineTool_Repairer</defName>
+    <height>0.3</height>
+    <builtFor>(1, 1)</builtFor>
+  </IsoRim.ModelDef>
+</Defs>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <IsoRimWeaponCards.Category>IsoRim Sprite Fix</IsoRimWeaponCards.Category>
+
+  <IsoRimWeaponCards.Setting.Weapon>Make paper pawns carry their weapon with the card</IsoRimWeaponCards.Setting.Weapon>
+  <IsoRimWeaponCards.Setting.WeaponHeight>Weapon height (debug): {0} cells</IsoRimWeaponCards.Setting.WeaponHeight>
+  <IsoRimWeaponCards.Setting.HideFromBehind>Hide the weapon when the card shows the pawn's back</IsoRimWeaponCards.Setting.HideFromBehind>
+  <IsoRimWeaponCards.Setting.BackDepth>Back-view depth (debug): {0}</IsoRimWeaponCards.Setting.BackDepth>
+  <IsoRimWeaponCards.Setting.VanillaCarry>Place idle weapons like the vanilla DrawCarriedWeapon (recommended)</IsoRimWeaponCards.Setting.VanillaCarry>
+
+  <IsoRimWeaponCards.Setting.AutoDetect>Auto-detect other mods' self-drawn parts (for supporting new mods)</IsoRimWeaponCards.Setting.AutoDetect>
+  <IsoRimWeaponCards.Setting.AutoDetectTip>When on, parts other mods draw themselves (halos, wings, shields, special weapons...) are recorded on paper pawns. Equip that part once, come back here and a new drawing method shows up; tick it and it is drawn the paper way. "Adjust" on each row sets its render layer (2901-3099 is inside the card, lower is further back) and its left/right and up/down offset inside the card plane. The setting saves itself and keeps working next time.</IsoRimWeaponCards.Setting.AutoDetectTip>
+
+  <IsoRimWeaponCards.Setting.ScanFallback>Compatibility scan: fall back for small inlined draw methods</IsoRimWeaponCards.Setting.ScanFallback>
+  <IsoRimWeaponCards.Setting.ScanFallbackTip>Some mods' draw methods are tiny and get inlined by the JIT, so their entry hook never runs (Isekai's ascension halo is one). With this on, the call stack is also compared near paper pawns as a fallback; turning it off saves a little performance but those parts may stop being fixed. Methods whose hook is confirmed to work do not need it.</IsoRimWeaponCards.Setting.ScanFallbackTip>
+
+  <IsoRimWeaponCards.Setting.Found>Detected drawing methods (tick one to draw it on the card):</IsoRimWeaponCards.Setting.Found>
+  <IsoRimWeaponCards.Setting.FoundTip>Ticking a method folds it into the paper card like a normal weapon. If the body or the part looks squashed or misplaced after ticking, untick it.</IsoRimWeaponCards.Setting.FoundTip>
+  <IsoRimWeaponCards.Setting.Sweep>Scan the current view (write drawing methods to the log)</IsoRimWeaponCards.Setting.Sweep>
+  <IsoRimWeaponCards.Setting.SweepDone>Recording every draw call for the next 3 frames; search the log for [IsoRimWeaponCards] sweep.</IsoRimWeaponCards.Setting.SweepDone>
+
+  <IsoRimWeaponCards.Setting.Adjust>Adjust</IsoRimWeaponCards.Setting.Adjust>
+  <IsoRimWeaponCards.Setting.UseQueue>Override render queue</IsoRimWeaponCards.Setting.UseQueue>
+  <IsoRimWeaponCards.Setting.ShiftX>Plane X</IsoRimWeaponCards.Setting.ShiftX>
+  <IsoRimWeaponCards.Setting.ShiftY>Plane Y</IsoRimWeaponCards.Setting.ShiftY>
+  <IsoRimWeaponCards.Setting.ShiftZ>Depth (towards camera)</IsoRimWeaponCards.Setting.ShiftZ>
+  <IsoRimWeaponCards.Setting.Reset>Reset to default</IsoRimWeaponCards.Setting.Reset>
+  <IsoRimWeaponCards.Setting.Source>Source mod: {0}</IsoRimWeaponCards.Setting.Source>
+
+  <IsoRimWeaponCards.Vanilla>Vanilla</IsoRimWeaponCards.Vanilla>
+
+  <IsoRimWeaponCards.Tab.Pawn>Pawn cards</IsoRimWeaponCards.Tab.Pawn>
+  <IsoRimWeaponCards.Tab.Building>Building cards</IsoRimWeaponCards.Tab.Building>
+  <IsoRimWeaponCards.Tab.Controls>Controls</IsoRimWeaponCards.Tab.Controls>
+  <IsoRimWeaponCards.Setting.ControlsIntro>The in-game entry point and this settings window itself are configured here.</IsoRimWeaponCards.Setting.ControlsIntro>
+  <IsoRimWeaponCards.Setting.EntryButton>Show a settings button in the in-game button row</IsoRimWeaponCards.Setting.EntryButton>
+  <IsoRimWeaponCards.Setting.EntryButtonTip>The button appears at the right edge of the screen on the map (the "auto home area" row) and opens this mod's floating settings window, without going through the options menu.</IsoRimWeaponCards.Setting.EntryButtonTip>
+  <IsoRimWeaponCards.Setting.DragHint>Floating window: drag it anywhere by its surface, resize it from the corner, and it remembers where you left it.</IsoRimWeaponCards.Setting.DragHint>
+  <IsoRimWeaponCards.Setting.OpenFloat>Open the floating settings window now</IsoRimWeaponCards.Setting.OpenFloat>
+  <IsoRimWeaponCards.Entry.Tip>IsoRim Sprite Fix: open settings</IsoRimWeaponCards.Entry.Tip>
+
+  <IsoRimWeaponCards.Setting.Building>Make card buildings draw their contents on the card</IsoRimWeaponCards.Setting.Building>
+  <IsoRimWeaponCards.Setting.BuildingTip>Buildings IsoRim stands up as cards draw their own contents (bodies, heads, blood, the pole tip on an impaling stake) flat on the ground; with this on they are folded into the building's card. Placement keeps the source mod's own drawing coordinates; the sliders below only nudge it, and set the layer.</IsoRimWeaponCards.Setting.BuildingTip>
+  <IsoRimWeaponCards.Setting.BuildingAutoDetect>Auto-detect what a building draws itself</IsoRimWeaponCards.Setting.BuildingAutoDetect>
+  <IsoRimWeaponCards.Setting.BuildingAutoDetectTip>When on, every method that draws inside a card building is recorded and listed below, so it is visible what gets folded into the card.</IsoRimWeaponCards.Setting.BuildingAutoDetectTip>
+  <IsoRimWeaponCards.Setting.BuildingSweep>Scan the current view (write building drawing methods to the log)</IsoRimWeaponCards.Setting.BuildingSweep>
+  <IsoRimWeaponCards.Setting.BuildingSweepDone>Recording building drawing methods for the next 3 frames; search the log for building draw.</IsoRimWeaponCards.Setting.BuildingSweepDone>
+  <IsoRimWeaponCards.Setting.BuildingFound>Detected building drawing methods (tick one to draw it on the card):</IsoRimWeaponCards.Setting.BuildingFound>
+  <IsoRimWeaponCards.Setting.BuildingFoundTip>Each row has its own "Adjust" for layer, card-plane left/up and depth. Anything unticked keeps the game's own drawing (flat on the ground).</IsoRimWeaponCards.Setting.BuildingFoundTip>
+  <IsoRimWeaponCards.Setting.BuildingEmpty>Nothing recorded yet: make the building an IsoRim card and turn the camera a little, or switch on auto-detect above.</IsoRimWeaponCards.Setting.BuildingEmpty>
+</LanguageData>

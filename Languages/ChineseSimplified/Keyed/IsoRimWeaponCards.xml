@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+  <IsoRimWeaponCards.Category>IsoRim 贴图武器修复</IsoRimWeaponCards.Category>
+
+  <IsoRimWeaponCards.Setting.Weapon>让纸片小人的武器随卡片立起</IsoRimWeaponCards.Setting.Weapon>
+  <IsoRimWeaponCards.Setting.WeaponHeight>武器高度（调试）：{0} 格</IsoRimWeaponCards.Setting.WeaponHeight>
+  <IsoRimWeaponCards.Setting.HideFromBehind>从小人背后看时隐藏武器</IsoRimWeaponCards.Setting.HideFromBehind>
+  <IsoRimWeaponCards.Setting.BackDepth>背身遮挡深度（调试）：{0}</IsoRimWeaponCards.Setting.BackDepth>
+  <IsoRimWeaponCards.Setting.VanillaCarry>待机时按原版 DrawCarriedWeapon 规则摆放（推荐）</IsoRimWeaponCards.Setting.VanillaCarry>
+
+  <IsoRimWeaponCards.Setting.AutoDetect>自动检测其它 mod 的自绘部件（用于适配新 mod）</IsoRimWeaponCards.Setting.AutoDetect>
+  <IsoRimWeaponCards.Setting.AutoDetectTip>打开后，其它 mod 自己绘制的部件（光环、翅膀、盾、特殊武器等）会在纸片小人身上被记录下来。装配一次那个部件，回到这里会多出一条可勾选的绘制方法，勾上即按纸片方式绘制。每条后面的“绘制调整”可以改它的渲染层级（2901~3099 是卡片内部，越小越靠后）和卡片平面内的左右/上下偏移。设置会自动保存，下次继续生效。</IsoRimWeaponCards.Setting.AutoDetectTip>
+
+  <IsoRimWeaponCards.Setting.ScanFallback>兼容扫描：为内联的小型绘制方法兜底</IsoRimWeaponCards.Setting.ScanFallback>
+  <IsoRimWeaponCards.Setting.ScanFallbackTip>有些 mod 的绘制方法很小，会被 JIT 内联，方法入口的钩子不生效（Isekai 的飞升光环就是这种）。打开时，会在纸片小人身边额外比对调用栈来兜底；关掉可以省一点性能，但这类部件可能不再修复。已经确认钩子能生效的方法不需要它。</IsoRimWeaponCards.Setting.ScanFallbackTip>
+
+  <IsoRimWeaponCards.Setting.Found>发现的绘制方法（勾选后按卡片方式绘制）：</IsoRimWeaponCards.Setting.Found>
+  <IsoRimWeaponCards.Setting.FoundTip>勾选后该绘制方法会像普通武器一样折进纸片卡片；如果勾上后身体或部件被压扁、错位，取消勾选即可。</IsoRimWeaponCards.Setting.FoundTip>
+  <IsoRimWeaponCards.Setting.Sweep>扫一遍当前画面（把绘制方法写进日志）</IsoRimWeaponCards.Setting.Sweep>
+  <IsoRimWeaponCards.Setting.SweepDone>已开始记录接下来 3 帧的所有绘制调用，日志里搜 [IsoRimWeaponCards] sweep。</IsoRimWeaponCards.Setting.SweepDone>
+
+  <IsoRimWeaponCards.Setting.Adjust>绘制调整</IsoRimWeaponCards.Setting.Adjust>
+  <IsoRimWeaponCards.Setting.UseQueue>指定渲染队列</IsoRimWeaponCards.Setting.UseQueue>
+  <IsoRimWeaponCards.Setting.ShiftX>平面左右</IsoRimWeaponCards.Setting.ShiftX>
+  <IsoRimWeaponCards.Setting.ShiftY>平面上下</IsoRimWeaponCards.Setting.ShiftY>
+  <IsoRimWeaponCards.Setting.ShiftZ>深度（朝镜头）</IsoRimWeaponCards.Setting.ShiftZ>
+  <IsoRimWeaponCards.Setting.Reset>恢复默认</IsoRimWeaponCards.Setting.Reset>
+  <IsoRimWeaponCards.Setting.Source>来源 mod：{0}</IsoRimWeaponCards.Setting.Source>
+
+  <IsoRimWeaponCards.Vanilla>原版</IsoRimWeaponCards.Vanilla>
+
+  <IsoRimWeaponCards.Tab.Pawn>角色卡片</IsoRimWeaponCards.Tab.Pawn>
+  <IsoRimWeaponCards.Tab.Building>建筑卡片</IsoRimWeaponCards.Tab.Building>
+  <IsoRimWeaponCards.Tab.Controls>控件设置</IsoRimWeaponCards.Tab.Controls>
+  <IsoRimWeaponCards.Setting.ControlsIntro>游戏内的入口和这个设置窗口本身的开关放在这里。</IsoRimWeaponCards.Setting.ControlsIntro>
+  <IsoRimWeaponCards.Setting.EntryButton>在游戏右下角的按钮栏显示设置入口</IsoRimWeaponCards.Setting.EntryButton>
+  <IsoRimWeaponCards.Setting.EntryButtonTip>入口按钮出现在地图视角右下角（"自动居住区"那一排），点一下就能打开本 mod 的浮动设置窗口，不用再进选项菜单。</IsoRimWeaponCards.Setting.EntryButtonTip>
+  <IsoRimWeaponCards.Setting.DragHint>浮动窗口：按住窗口任意位置拖动即可移动，右下角可以拉伸大小，关掉时会记住位置。</IsoRimWeaponCards.Setting.DragHint>
+  <IsoRimWeaponCards.Setting.OpenFloat>现在打开浮动设置窗口</IsoRimWeaponCards.Setting.OpenFloat>
+  <IsoRimWeaponCards.Entry.Tip>IsoRim 贴图修复：打开设置窗口</IsoRimWeaponCards.Entry.Tip>
+
+  <IsoRimWeaponCards.Setting.Building>让立牌建筑的内部内容跟随卡片立起</IsoRimWeaponCards.Setting.Building>
+  <IsoRimWeaponCards.Setting.BuildingTip>被 IsoRim 当成立牌（卡片）的建筑，它自己绘制的内容（穿刺桩上的人、尸体、头颅、血迹、尖刺）会跟着卡片一起立起来。位置沿用原 mod 的绘制坐标，这里只做微调和层级。</IsoRimWeaponCards.Setting.BuildingTip>
+  <IsoRimWeaponCards.Setting.BuildingAutoDetect>自动检测建筑的自绘部件</IsoRimWeaponCards.Setting.BuildingAutoDetect>
+  <IsoRimWeaponCards.Setting.BuildingAutoDetectTip>打开后，立牌建筑自己绘制的方法会被记录下来，显示在下面的清单里，用来确认哪些内容被折进了卡片。</IsoRimWeaponCards.Setting.BuildingAutoDetectTip>
+  <IsoRimWeaponCards.Setting.BuildingSweep>扫一遍当前画面（把建筑的绘制方法写进日志）</IsoRimWeaponCards.Setting.BuildingSweep>
+  <IsoRimWeaponCards.Setting.BuildingSweepDone>已开始记录接下来 3 帧的建筑绘制方法，日志里搜 building draw。</IsoRimWeaponCards.Setting.BuildingSweepDone>
+  <IsoRimWeaponCards.Setting.BuildingFound>发现的建筑绘制方法（勾选后按卡片方式绘制）：</IsoRimWeaponCards.Setting.BuildingFound>
+  <IsoRimWeaponCards.Setting.BuildingFoundTip>每条都可以用「绘制调整」单独设层级、卡片平面左右/上下和深度。没勾选的保持游戏原本的画法（平躺）。</IsoRimWeaponCards.Setting.BuildingFoundTip>
+  <IsoRimWeaponCards.Setting.BuildingEmpty>还没有记录：把建筑设成 IsoRim 的立牌，转一圈视角；或打开上面的自动检测。</IsoRimWeaponCards.Setting.BuildingEmpty>
+</LanguageData>

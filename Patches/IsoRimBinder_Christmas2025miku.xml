@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- Binds R3D_MyModelPack_Christmas2025miku to Christmas2025miku and adds its fields newer than Api 2 when IsoRim has Api 52 or later (the fields it uses); an older IsoRim leaves the thing as it is. -->
+  <Operation Class="IsoRimPackGate.PatchOperation_IfIsoRimApi">
+    <minVersion>52</minVersion>
+    <apply Class="PatchOperationAdd">
+      <xpath>/Defs/IsoRim.ModelDef[defName="R3D_MyModelPack_Christmas2025miku"]</xpath>
+      <value>
+        <thingDef>Christmas2025miku</thingDef>
+        <shape>Card</shape>
+      </value>
+    </apply>
+  </Operation>
+</Patch>

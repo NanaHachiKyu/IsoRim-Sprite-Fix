@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- IsoRim model binder export, 2026-11-16 19:36, IsoRim Api 79.
+     Model for MS_HighStackSupplyShelf from: 
+     No thingDef here and no fields newer than Api 2: Patches/IsoRimBinder_MS_HighStackSupplyShelf.xml adds them (see IsoRim's Docs/ModelPacks.md). -->
+<Defs>
+  <IsoRim.ModelDef>
+    <defName>R3D_MyModelPack_MS_HighStackSupplyShelf</defName>
+    <height>0.3</height>
+    <spriteTint>true</spriteTint>
+    <builtFor>(1, 1)</builtFor>
+  </IsoRim.ModelDef>
+</Defs>

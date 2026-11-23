@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- IsoRim model binder export, 2026-11-15 09:42, IsoRim Api 77.
+     Model for MS_StorageReceiver from: 
+     No thingDef here: Patches/IsoRimBinder_MS_StorageReceiver.xml adds them (see IsoRim's Docs/ModelPacks.md). -->
+<Defs>
+  <IsoRim.ModelDef>
+    <defName>R3D_MyModelPack_MS_StorageReceiver</defName>
+    <height>0.3</height>
+    <spriteTint>true</spriteTint>
+    <builtFor>(1, 1)</builtFor>
+  </IsoRim.ModelDef>
+</Defs>

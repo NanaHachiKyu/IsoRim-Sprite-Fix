@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Patch>
+  <!-- Binds R3D_MyModelPack_Building_NR_AutoMachineTool_Puller_Wall to Building_NR_AutoMachineTool_Puller_Wall and adds its fields newer than Api 2 when IsoRim has Api 52 or later (the fields it uses); an older IsoRim leaves the thing as it is. -->
+  <Operation Class="IsoRimPackGate.PatchOperation_IfIsoRimApi">
+    <minVersion>52</minVersion>
+    <apply Class="PatchOperationAdd">
+      <xpath>/Defs/IsoRim.ModelDef[defName="R3D_MyModelPack_Building_NR_AutoMachineTool_Puller_Wall"]</xpath>
+      <value>
+        <thingDef>Building_NR_AutoMachineTool_Puller_Wall</thingDef>
+        <shape>Box</shape>
+        <boxFaces>
+          <li>
+            <side>North</side>
+            <look>None</look>
+          </li>
+          <li>
+            <side>South</side>
+            <look>None</look>
+          </li>
+          <li>
+            <side>East</side>
+            <look>MeanColour</look>
+          </li>
+          <li>
+            <side>West</side>
+            <look>MeanColour</look>
+          </li>
+        </boxFaces>
+      </value>
+    </apply>
+  </Operation>
+</Patch>
