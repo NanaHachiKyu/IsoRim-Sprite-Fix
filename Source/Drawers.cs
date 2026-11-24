@@ -777,6 +777,14 @@ namespace IsoRimWeaponCards
 
         private static bool Fold(ref Matrix4x4 matrix, ref int renderQueue, DrawerTune t)
         {
+            // A mote that is not attached to anything (a bullet, smoke, a blood spray) must never be folded: it does
+            // not move with the pawn, so it would be dragged onto the card as a stretched smear. Only an attached
+            // mote - the vanilla fishing rod is one - belongs on the card.
+            Mote mote = Patch.CurrentMote;
+            if (mote != null && !mote.link1.Linked)
+            {
+                return false;
+            }
             Matrix4x4 xform;
             Matrix4x4 extra;
             Pawn pawn;

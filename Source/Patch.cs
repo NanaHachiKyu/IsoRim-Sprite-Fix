@@ -295,7 +295,8 @@ namespace IsoRimWeaponCards
             if (hasBar)
             {
                 Rect bar = new Rect(body.xMax - PageBarWidth, body.y, PageBarWidth, body.height);
-                float thumb = Mathf.Clamp(body.height / contentHeight, 0.02f, 1f) * maxScroll;
+                // GUI.VerticalScrollbar wants the handle SIZE as a 0..1 fraction, not a length: multiplying by maxScroll made the handle fill the track and the view could not reach the end.
+                float thumb = Mathf.Clamp(body.height / contentHeight, 0.02f, 1f);
                 pageScroll[idx].y = Mathf.Clamp(
                     GUI.VerticalScrollbar(bar, pageScroll[idx].y, thumb, 0f, maxScroll), 0f, maxScroll);
             }
@@ -323,7 +324,7 @@ namespace IsoRimWeaponCards
             if (maxScroll > 0.5f)
             {
                 Rect bar = new Rect(area.x + area.width - PageBarWidth, area.y, PageBarWidth, area.height);
-                float thumb = Mathf.Clamp(area.height / viewHeight, 0.02f, 1f) * maxScroll;
+                float thumb = Mathf.Clamp(area.height / viewHeight, 0.02f, 1f);   // fraction, not length (see DrawPage)
                 scroll.y = Mathf.Clamp(GUI.VerticalScrollbar(bar, scroll.y, thumb, 0f, maxScroll), 0f, maxScroll);
             }
         }
@@ -686,6 +687,20 @@ namespace IsoRimWeaponCards
         private static int helperPatched;
         [ThreadStatic] private static Pawn renderPawn;
         private static FieldInfo rendererPawnField;
+        // Card cache refresh: IsoRim Paper2D Fix (isorim.uprightitems) shifts DrawHook.xform for a pawn sitting on a
+        // chair in a RenderPawnAt prefix that runs AFTER IsoRim cached the card matrix, so the body got the shifted
+        // matrix while parts folded by this mod got the stale one and drifted away. Re-record the card at the very
+        // end of the prefix chain.
+        private static FieldInfo drawHookActive;
+        private static FieldInfo drawHookBillboard;
+        private static MethodInfo cardOverlayUpright;
+        // Seating: IsoRim Paper2D Fix's chair "depth" fix pushes a sitter forward by a view-dependent amount that gets
+        // amplified on upper floors and jumps at a certain camera angle. The user asked to drop it entirely, so we
+        // remember the card matrix from just after IsoRim set it and put it back before the card cache is refreshed.
+        private static FieldInfo drawHookXform;
+        private static MethodInfo posesSeatUnder;
+        [ThreadStatic] private static Matrix4x4 preSeatXform;
+        [ThreadStatic] private static bool preSeatValid;
 
         internal static bool ScopeActive
         {
@@ -754,6 +769,8 @@ namespace IsoRimWeaponCards
                 BuildingCards.Install(harmony);
                 PatchPlaySettingsEntry(harmony);
                 PatchPawnDrawAt(harmony);
+                PatchMoteDraw(harmony);
+                PatchCardCacheRefresh(harmony);
                 // The model pack used to be a separate mod (MyModelPack, exported by IsoRim's model binder); it lives
                 // here now, so the binder's export folder is synced into this mod instead.
                 MethodInfo shutdown = AccessTools.Method(typeof(Root), "Shutdown");
@@ -848,6 +865,170 @@ namespace IsoRimWeaponCards
                 {
                     list.Add(__instance);
                 }
+            }
+            catch
+            {
+            }
+        }
+
+        // The mote currently inside Mote.DrawMote, if any. Fold uses this to tell an attached mote (the fishing rod,
+        // link1.Linked) from a free-standing one (a bullet, smoke, blood spray): only the attached kind belongs on
+        // the card, the rest would be dragged onto it as a stretched smear when a pawn is on screen.
+        [ThreadStatic] private static Mote currentMote;
+
+        internal static Mote CurrentMote
+        {
+            get { return currentMote; }
+        }
+
+        private static void PatchMoteDraw(Harmony harmony)
+        {
+            try
+            {
+                MethodInfo drawMote = AccessTools.Method(typeof(Mote), "DrawMote");
+                if (drawMote == null)
+                {
+                    return;
+                }
+                harmony.Patch(drawMote,
+                    prefix: new HarmonyMethod(typeof(Patch).GetMethod(nameof(MoteDraw_Prefix), BindingFlags.NonPublic | BindingFlags.Static)),
+                    finalizer: new HarmonyMethod(typeof(Patch).GetMethod(nameof(MoteDraw_Finalizer), BindingFlags.NonPublic | BindingFlags.Static)));
+            }
+            catch (Exception e)
+            {
+                Log.Warning(Tag + "Mote.DrawMote hook failed: " + e.Message);
+            }
+        }
+
+        private static void MoteDraw_Prefix(Mote __instance)
+        {
+            currentMote = __instance;
+        }
+
+        private static void MoteDraw_Finalizer()
+        {
+            currentMote = null;
+        }
+
+        // IsoRim Paper2D Fix (isorim.uprightitems) rewrites DrawHook.xform for a colonist sitting on a chair/bench, in
+        // a RenderPawnAt prefix ordered Last + "after isorim.core" - i.e. after IsoRim has already stored the card
+        // matrix in CardOverlay. The body is then drawn with the shifted matrix, but every part this mod folds reads
+        // the stale cached one, so body and parts drift apart ("sprites fly away while sitting").
+        // Refreshing the cache at the very end of the prefix chain keeps both on the same matrix.
+        private static void PatchCardCacheRefresh(Harmony harmony)
+        {
+            try
+            {
+                cardOverlayUpright = AccessTools.TypeByName("IsoRim.CardOverlay")?.GetMethod("Upright", BindingFlags.Public | BindingFlags.Static);
+                Type drawHook = AccessTools.TypeByName("IsoRim.DrawHook");
+                drawHookActive = drawHook != null ? AccessTools.Field(drawHook, "active") : null;
+                drawHookBillboard = drawHook != null ? AccessTools.Field(drawHook, "billboard") : null;
+                drawHookXform = drawHook != null ? AccessTools.Field(drawHook, "xform") : null;
+                posesSeatUnder = AccessTools.TypeByName("IsoRim.Poses")?.GetMethod("SeatUnder", BindingFlags.Public | BindingFlags.Static, null, new[] { typeof(Pawn) }, null);
+                if (cardOverlayUpright == null || drawHookActive == null)
+                {
+                    Log.Warning(Tag + "IsoRim.CardOverlay.Upright not found; sitting pawns may drift when another mod shifts the card.");
+                    return;
+                }
+                MethodInfo renderPawn = AccessTools.Method(typeof(PawnRenderer), "RenderPawnAt");
+                if (renderPawn == null)
+                {
+                    return;
+                }
+                // Record the matrix right after IsoRim has set it (and before IsoRim Paper2D Fix rewrites it), so a
+                // sitter can be put back on the un-shifted matrix when that mod's seat-depth push is to be ignored.
+                if (drawHookXform != null && posesSeatUnder != null)
+                {
+                    harmony.Patch(renderPawn,
+                        prefix: new HarmonyMethod(typeof(Patch).GetMethod(nameof(RecordSeatXform), BindingFlags.NonPublic | BindingFlags.Static))
+                        {
+                            priority = Priority.LowerThanNormal,
+                            after = new[] { "isorim.core" }
+                        });
+                }
+                harmony.Patch(renderPawn,
+                    prefix: new HarmonyMethod(typeof(Patch).GetMethod(nameof(RefreshCardCache), BindingFlags.NonPublic | BindingFlags.Static))
+                    {
+                        priority = Priority.Last,
+                        after = new[] { "isorim.uprightitems.workshop" }
+                    });
+            }
+            catch (Exception e)
+            {
+                Log.Warning(Tag + "card cache refresh hook failed: " + e.Message);
+            }
+        }
+
+        // Runs right after IsoRim set DrawHook.xform and before IsoRim Paper2D Fix's seat-depth rewrite. Only sitters
+        // are remembered; other pawns keep whatever that mod does (trap/bed hosts are not touched by this).
+        private static void RecordSeatXform(PawnRenderer __instance)
+        {
+            preSeatValid = false;
+            try
+            {
+                if (posesSeatUnder == null || drawHookXform == null || drawHookActive == null || __instance == null)
+                {
+                    return;
+                }
+                if (!(bool)drawHookActive.GetValue(null))
+                {
+                    return;
+                }
+                if (rendererPawnField == null)
+                {
+                    rendererPawnField = AccessTools.Field(typeof(PawnRenderer), "pawn");
+                }
+                Pawn pawn = rendererPawnField != null ? rendererPawnField.GetValue(__instance) as Pawn : null;
+                if (pawn == null || pawn.Dead || !pawn.Spawned)
+                {
+                    return;
+                }
+                if (posesSeatUnder.Invoke(null, new object[] { pawn }) == null)
+                {
+                    return;   // not sitting
+                }
+                preSeatXform = (Matrix4x4)drawHookXform.GetValue(null);
+                preSeatValid = true;
+            }
+            catch
+            {
+            }
+        }
+
+        private static void RefreshCardCache(PawnRenderer __instance)
+        {
+            try
+            {
+                if (__instance == null || cardOverlayUpright == null || drawHookActive == null)
+                {
+                    return;
+                }
+                // Only while this pawn is being drawn as a card; otherwise the cache should stay empty.
+                if (!(bool)drawHookActive.GetValue(null))
+                {
+                    return;
+                }
+                if (drawHookBillboard != null && (bool)drawHookBillboard.GetValue(null))
+                {
+                    return;
+                }
+                if (rendererPawnField == null)
+                {
+                    rendererPawnField = AccessTools.Field(typeof(PawnRenderer), "pawn");
+                }
+                Pawn pawn = rendererPawnField != null ? rendererPawnField.GetValue(__instance) as Pawn : null;
+                if (pawn == null)
+                {
+                    return;
+                }
+                // Drop the seat-depth push for a sitter: put the un-shifted matrix back before re-recording the card,
+                // so body and parts both stay where IsoRim itself would put them.
+                if (preSeatValid && drawHookXform != null)
+                {
+                    drawHookXform.SetValue(null, preSeatXform);
+                }
+                preSeatValid = false;
+                cardOverlayUpright.Invoke(null, new object[] { pawn });
             }
             catch
             {
